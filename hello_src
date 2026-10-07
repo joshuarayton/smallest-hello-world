@@ -1,0 +1,29 @@
+# credits to Brian Raiter <breadbox@muppetlabs.com>
+# https://www.muppetlabs.com/~breadbox/software/tiny/
+# https://www.muppetlabs.com/~breadbox/software/tiny/hello.asm.txt
+
+# 0x0
+# *magic   class data version osabi abiversion padding         | ELF header
+#         |*type                    -offset           -vaddr   | Program header
+  7f454c46 01    00   00      00    14         000000 14009335
+
+# 0x10
+# *type *machine version                    -entry                            -phoff   | ELF header
+# paddr          -filesz                    -memsz                            -flags   | Program header
+#               |inc eax pusha mov dl value adc al value xchg eax ebx xor eax value    | text
+  0200  0300     40      60    b2     0e    14     00    93           35      04000000
+
+# 0x20
+# shoff          flags             ehsize    *phentsize *phnum shentsize | ELF header
+# align         |                                                        | Program header
+# mov ecx value     int value popa int value|                            | text
+#                                                             |H  e      | data
+  b9      2e0093 35 cd  80    61   cd  80    2000       0100   48 65
+
+# 0x30
+# shnum shstrndx|                        | ELF header
+# l  l  o  ,        W  o  r  l  d  !  \n | data
+  6c 6c 6f 2c    20 57 6f 72 6c 64 21 0a
+
+# 0x3c
+
